@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+}
+section {
+    overflow: scroll;
+    -webkit-overflow-scrolling:touch;
+    width: 100%;
+    min-height: 411px;
+    background: #c5ccd4;
+    padding-bottom: 50px;
+    position: absolute;
+    display: none;
+}
+section.aktiv{
+    display: block;
+}
+h2 {
+    margin: 0;
+    padding: 20px 20px 0;
+    font-size: 17px;
+    color: #4c566c;
+    text-shadow: 0 1px 0 #fff;
+}
+.versteckt {
+    display: none;
+}
+/* Karte */
+section#karte {
+    top: 0;
+    right: 0;
+    bottom: 49px;
+    left: 0;
+    background-image: url(../bilder/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+

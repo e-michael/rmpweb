@@ -1,0 +1,75 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GPS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery/jquery-1.8.2.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <section id="karte">
+
+        </section>
+        <table>
+            <tr id ="longitude">
+                <th>Longitude:</th>
+                <td></td>
+            </tr>
+            <tr id ="latitude">
+                <th>Latitude:</th>
+                <td></td>
+            </tr>
+            <tr id ="accuracy">
+                <th>Genauigkeit:</th>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <script>
+            var longitude, latitude, meinelongitude, meinelatitude, karte, marker, accuracy;
+            $(function() {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    meinelongitude = position.coords.longitude;
+                    meinelatitude = position.coords.latitude;
+                    accuracy = position.coords.accuracy;
+                    $('#longitude td').html(meinelongitude);
+                    $('#latitude td').html(meinelatitude);
+                    $('#accuracy td').html(accuracy);
+                    var optionen = {
+                        zoom: 15,
+                        center: new google.maps.LatLng(
+                                meinelatitude, meinelongitude),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    karte = new google.maps.Map(document.getElementById('karte'), optionen);
+                    marker = new google.maps.Marker({
+                        map: karte,
+                        animation: google.maps.Animation.DROP,
+                        position: new google.maps.LatLng(meinelatitude, meinelongitude)
+                    });
+
+                });
+            
+            window.setTimeout(function() {
+                $.getJSON('daten/orte.json?=' + Date.now(), function(data) {
+                    $.each(data, function(orte, daten) {
+                        marker = new google.maps.Marker({
+                            map: karte,
+                            position: new google.maps.LatLng(
+                                    daten.Position.Latitude, daten.Position.Longitude),
+                            animation: google.maps.Animation.DROP
+                        });
+                    });
+                    });
+                }, 1);
+            });
+        </script>
+    </body>
+
+</html>

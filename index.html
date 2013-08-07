@@ -1,61 +1,51 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
-  <head>
-        <title>GPS</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="js/jquery/jquery-1.8.2.js"></script>
-        <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-        <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1 , maximum-scale=1"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <title>RMP</title>
+        
+        <link rel="stylesheet" href="styles/allgemein.css" type="text/css">
+        <link rel="stylesheet" href="styles/button.css" type="text/css">
+        <link rel="stylesheet" href="styles/liste.css" type="text/css">
+        <link rel="stylesheet" href="styles/toolbar.css" type="text/css">
+
+        <link rel="apple-touch-icon-precomposed" href="/bilder/icon-ipad.png" sizes="72x72" />
+        <link rel="apple-touch-icon-precomposed" href="/bilder/icon-iphone-retina.png" sizes="114x114" />
+        <link rel="apple-touch-icon-precomposed" href="/bilder/icon-iphone.png" />
+
+        <link rel="apple-touch-startup-image" href="/bilder/splash-ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px)" />
+        <link rel="apple-touch-startup-image" href="/bilder/splash-iphone.png" />
+
     </head>
     <body>
         <section id="karte">
-
         </section>
-        <table>
-            <tr id ="longitude">
-                <th>Longitude:</th>
-                <td></td>
-            </tr>
-            <tr id ="latitude">
-                <th>Latitude:</th>
-                <td></td>
-            </tr>
-            <tr id ="accuracy">
-                <th>Genauigkeit:</th>
-                <td></td>
-            </tr>
+        <section id="uebersicht">
+            <h2>Firmen in der Naehe</h2>
+            <ul>
+                <!-- Wird dynamisch befüllt -->
+            </ul>
+        </section>
+        <section id="optionen">
+            <h2>Optionen</h2>
+            <ul>
+                <li><label>Verlag<span><input type="checkbox" checked="checked" class="Verlag"></span></label></li>
+                <!--    <li><label>Burger<span><input type="checkbox" checked="checked" class="Burger"></span></label></li>
+                    <li><label>Pasta<span><input type="checkbox" checked="checked" class="Pasta"></span></label></li>
+                    <li><label>Sushi<span><input type="checkbox" checked="checked" class="Sushi"></span></label></li> !-->
+            </ul>
+        </section>
+        <nav>
+            <li><a class="karte" href="#karte">Karte</a></li>
+            <li><a class="uebersicht" href="#uebersicht">Liste</a></li>
+            <li><a class="optionen" href="#optionen">Optionen</a></li>
 
-        </table>
+        </nav>
+<script src="js/jquery/jquery-1.8.2.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <script src="js/app.js"></script>
 
-        <script>
-            var longitude, latitude, meinelongitude, meinelatitude, karte, marker;
-           
-            $(function() {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    meinelongitude = position.coords.longitude;
-                    meinelatitude = position.coords.latitude;
-                    var optionen = {
-                        zoom: 13,
-                        center: new google.maps.LatLng(
-                                meinelatitude, meinelongitude),
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    };
-                    karte = new google.maps.Map(document.getElementById('karte'), optionen);
-                    marker = new google.maps.Marker({
-                        map: karte,
-                        animation: google.maps.Animation.DROP,
-                        position: new google.maps.LatLng(meinelatitude, meinelongitude)
-                    });
-                });
-
-            });
-
-
-        </script>
     </body>
-
 </html>
